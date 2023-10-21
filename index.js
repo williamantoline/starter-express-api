@@ -29,10 +29,10 @@ db.run('CREATE TABLE users( \
     image_path NVARCHAR(255),\
     created_at INTEGER\
 )', (err) => {
-    let insert = 'INSERT INTO users (name, email, image_path, created_at) VALUES (?,?,?,?)';
-    db.run(insert, ["Andi", "andi@gmail.com", null, 1000]);
-    db.run(insert, ["Budi", "budi@gmail.com", null, 1000]);
-    db.run(insert, ["Chaneka", "chaneka@gmail.com", null, 1000]);
+    // let insert = 'INSERT INTO users (name, email, image_path, created_at) VALUES (?,?,?,?)';
+    // db.run(insert, ["Andi", "andi@gmail.com", null, 1000]);
+    // db.run(insert, ["Budi", "budi@gmail.com", null, 1000]);
+    // db.run(insert, ["Chaneka", "chaneka@gmail.com", null, 1000]);
 });
 
 db.run('CREATE TABLE recipes( \
@@ -43,10 +43,10 @@ db.run('CREATE TABLE recipes( \
     created_at INTEGER NOT NULL,\
     FOREIGN KEY (user_id) REFERENCES users(id)\
 )', (err) => {
-    let insert = 'INSERT INTO recipes (user_id, title, description, created_at) VALUES (?,?,?,?)';
-    db.run(insert, [1, "Resep 2", "Description 1", 1004]);
-    db.run(insert, [1, "Resep 3", "Description 2", 1000]);
-    db.run(insert, [2, "Resep 1", "Description 3", 1002]);
+    // let insert = 'INSERT INTO recipes (user_id, title, description, created_at) VALUES (?,?,?,?)';
+    // db.run(insert, [1, "Resep 2", "Description 1", 1004]);
+    // db.run(insert, [1, "Resep 3", "Description 2", 1000]);
+    // db.run(insert, [2, "Resep 1", "Description 3", 1002]);
 });
 
 db.run('CREATE TABLE recipe_steps( \
@@ -58,12 +58,12 @@ db.run('CREATE TABLE recipe_steps( \
     created_at INTEGER NOT NULL,\
     FOREIGN KEY (recipe_id) REFERENCES recipes(id)\
 )', (err) => {
-    let insert = 'INSERT INTO recipe_steps (recipe_id, content, type, timer, created_at) VALUES (?,?,?,?,?)';
-    db.run(insert, [1, "Step 1", "Description 1", "tip", 1000]);
-    db.run(insert, [1, "Step 2", "Description 2", "tip", 1000]);
-    db.run(insert, [2, "Step 1", "Description 1", "tip", 1000]);
-    db.run(insert, [2, "Step 2", "Description 2", "tip", 1000]);
-    db.run(insert, [3, "Step 1", "Description 1", "tip", 1000]);
+    // let insert = 'INSERT INTO recipe_steps (recipe_id, content, type, timer, created_at) VALUES (?,?,?,?,?)';
+    // db.run(insert, [1, "Step 1", "Description 1", "tip", 1000]);
+    // db.run(insert, [1, "Step 2", "Description 2", "tip", 1000]);
+    // db.run(insert, [2, "Step 1", "Description 1", "tip", 1000]);
+    // db.run(insert, [2, "Step 2", "Description 2", "tip", 1000]);
+    // db.run(insert, [3, "Step 1", "Description 1", "tip", 1000]);
 });
 
 
