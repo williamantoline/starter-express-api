@@ -29,10 +29,13 @@ db.run('CREATE TABLE users( \
     imagePath NVARCHAR(255),\
     createdAt INTEGER\
 )', (err) => {
-    // let insert = 'INSERT INTO users (name, email, imagePath, createdAt) VALUES (?,?,?,?)';
-    // db.run(insert, ["Andi", "andi@gmail.com", null, 1000]);
-    // db.run(insert, ["Budi", "budi@gmail.com", null, 1000]);
-    // db.run(insert, ["Chaneka", "chaneka@gmail.com", null, 1000]);
+    let insert = 'INSERT INTO users (name, email, imagePath, createdAt) VALUES (?,?,?,?)';
+    let createdAt = Date.now();
+    db.run(insert, ["Andi", "andi@gmail.com", null, createdAt]);
+    db.run(insert, ["Budi", "budi@gmail.com", null, createdAt]);
+    db.run(insert, ["Chaneka", "chaneka@gmail.com", null, createdAt]);
+    db.run(insert, ["Deni", "deni@gmail.com", null, createdAt]);
+    db.run(insert, ["Eka", "eka@gmail.com", null, createdAt]);
 });
 
 db.run('CREATE TABLE recipes( \
@@ -43,10 +46,17 @@ db.run('CREATE TABLE recipes( \
     createdAt INTEGER NOT NULL,\
     FOREIGN KEY (userId) REFERENCES users(id)\
 )', (err) => {
-    // let insert = 'INSERT INTO recipes (userId, title, description, createdAt) VALUES (?,?,?,?)';
-    // db.run(insert, [1, "Resep 2", "Description 1", 1004]);
-    // db.run(insert, [1, "Resep 3", "Description 2", 1000]);
-    // db.run(insert, [2, "Resep 1", "Description 3", 1002]);
+    let insert = 'INSERT INTO recipes (userId, title, description, createdAt) VALUES (?,?,?,?)';
+    let createdAt = Date.now();
+    db.run(insert, [1, "Resep 1", "Description 1", createdAt]);
+    db.run(insert, [1, "Resep 2", "Description 2", createdAt]);
+    db.run(insert, [2, "Resep 3", "Description 3", createdAt]);
+    db.run(insert, [3, "Resep 4", "Description 3", createdAt]);
+    db.run(insert, [4, "Resep 5", "Description 3", createdAt]);
+    db.run(insert, [4, "Resep 6", "Description 3", createdAt]);
+    db.run(insert, [5, "Resep 7", "Description 3", createdAt]);
+    db.run(insert, [5, "Resep 8", "Description 8", createdAt]);
+    db.run(insert, [5, "Resep 9", "Description 9", createdAt]);
 });
 
 db.run('CREATE TABLE recipe_steps( \
@@ -58,12 +68,26 @@ db.run('CREATE TABLE recipe_steps( \
     createdAt INTEGER NOT NULL,\
     FOREIGN KEY (recipeId) REFERENCES recipes(id)\
 )', (err) => {
-    // let insert = 'INSERT INTO recipe_steps (recipeId, content, type, timer, createdAt) VALUES (?,?,?,?,?)';
-    // db.run(insert, [1, "Step 1", "Description 1", "tip", 1000]);
-    // db.run(insert, [1, "Step 2", "Description 2", "tip", 1000]);
-    // db.run(insert, [2, "Step 1", "Description 1", "tip", 1000]);
-    // db.run(insert, [2, "Step 2", "Description 2", "tip", 1000]);
-    // db.run(insert, [3, "Step 1", "Description 1", "tip", 1000]);
+    let insert = 'INSERT INTO recipe_steps (recipeId, content, type, timer, createdAt) VALUES (?,?,?,?,?)';
+    let createdAt = Date.now();
+    db.run(insert, [1, "Step 1", "Description 1", "tip", createdAt]);
+    db.run(insert, [1, "Step 2", "Description 2", "tip", createdAt]);
+    db.run(insert, [2, "Step 1", "Description 1", "tip", createdAt]);
+    db.run(insert, [2, "Step 2", "Description 2", "tip", createdAt]);
+    db.run(insert, [3, "Step 1", "Description 1", "tip", createdAt]);
+    db.run(insert, [3, "Step 2", "Description 2", "tip", createdAt]);
+    db.run(insert, [3, "Step 3", "Description 3", "tip", createdAt]);
+    db.run(insert, [3, "Step 4", "Description 4", "tip", createdAt]);
+    db.run(insert, [4, "Step 1", "Description 1", "tip", createdAt]);
+    db.run(insert, [5, "Step 1", "Description 1", "tip", createdAt]);
+    db.run(insert, [6, "Step 1", "Description 1", "tip", createdAt]);
+    db.run(insert, [7, "Step 1", "Description 1", "tip", createdAt]);
+    db.run(insert, [8, "Step 1", "Description 1", "tip", createdAt]);
+    db.run(insert, [9, "Step 1", "Description 1", "tip", createdAt]);
+    db.run(insert, [9, "Step 2", "Description 2", "tip", createdAt]);
+    db.run(insert, [9, "Step 3", "Description 3", "tip", createdAt]);
+    db.run(insert, [10, "Step 1", "Description 1", "tip", createdAt]);
+    db.run(insert, [10, "Step 2", "Description 2", "tip", createdAt]);
 });
 
 

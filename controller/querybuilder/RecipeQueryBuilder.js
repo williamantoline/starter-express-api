@@ -35,7 +35,7 @@ class RecipeQueryBuilder {
             this.sql += ` ORDER BY ${sort} ${type}`;
         }
 
-        this.sql += ` LIMIT ${limit} OFFSET ${limit * this.page}`;
+        this.sql += ` LIMIT ${limit} OFFSET ${limit * (this.page - 1)}`;
 
         return this.sql;
     };
