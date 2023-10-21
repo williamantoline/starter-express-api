@@ -19,12 +19,17 @@ class RecipeQueryBuilder {
         this.sort = req.query.sort;
         this.page = req.query.page ?? 1;
         this.limit = req.query.limit ?? 15;
+        this.search = req.query.search;
 
         Object.keys(this.filters).forEach(key => {
             if (key in this.availableFilters) {
                 this.sql += ` AND ${this.availableFilters[key]} = ${this.filters[key]}`;
             }
         });
+
+        if (this.search) {
+            this.sql += ` AND title LIKE '%${this.search}%'`;
+        }
 
         if (this.sort && (this.sort in this.availableSorts)) {
             let type = "ASC";
