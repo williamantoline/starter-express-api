@@ -18,7 +18,7 @@ class RecipeQueryBuilder {
         this.filters = req.query.filter ?? {};
         this.sort = req.query.sort;
         this.page = req.query.page ?? 1;
-        const limit = 15;
+        this.limit = req.query.limit ?? 15;
 
         Object.keys(this.filters).forEach(key => {
             if (key in this.availableFilters) {
@@ -35,7 +35,7 @@ class RecipeQueryBuilder {
             this.sql += ` ORDER BY ${sort} ${type}`;
         }
 
-        this.sql += ` LIMIT ${limit} OFFSET ${limit * (this.page - 1)}`;
+        this.sql += ` LIMIT ${this.limit} OFFSET ${this.limit * (this.page - 1)}`;
 
         return this.sql;
     };
