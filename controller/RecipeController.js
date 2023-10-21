@@ -48,9 +48,10 @@ exports.show = async (req, res) => {
             }
             if (!recipe) {
                 res.status(404).json({
-                    message: "not found",
+                    error: "not found",
                 });
                 return;
+                
             }
             db.get(`SELECT * FROM users where id = ?`, [recipe.userId], (err, user) => {
                 if (err) {
