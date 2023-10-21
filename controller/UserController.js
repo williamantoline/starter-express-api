@@ -1,7 +1,6 @@
 const db = require("../model");
 
 exports.index = async (req, res) => {
-    console.log(req.params);
     let sql = "SELECT * FROM users";
 
     return db.all(sql, [], (err, rows) => {

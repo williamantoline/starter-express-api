@@ -7,7 +7,7 @@ exports.index = async (req, res) => {
     let builder = new RecipeQueryBuilder();
     let sql = builder.getQuery(req);
 
-    return db.all(sql, [], (err, rows) => {
+    return db.all(sql, [], async (err, rows) => {
         if (err) {
             res.status(400).json({
                 error: err.message,
@@ -15,7 +15,7 @@ exports.index = async (req, res) => {
         }
         res.json({
             message: "success",
-            data: rows,
+            data: RecipeResource.toCollection(rows),
         });
     });
 }
@@ -26,19 +26,19 @@ exports.show = async (req, res) => {
           res.status(400).json({"error":err.message});
           return;
         }
-        db.get(`SELECT * FROM users where id = ?`, [recipe.user_id], (err, user) => {
+        db.get(`SELECT * FROM users where id = ?`, [recipe.userId], (err, user) => {
             if (err) {
                 res.status(400).json({"error":err.message});
                 return;
             }
-            db.all(`SELECT * FROM recipe_steps where recipe_id = ?`, [req.params.id], (err, recipe_steps) => {
+            db.all(`SELECT * FROM recipe_steps where recipeId = ?`, [req.params.id], (err, recipe_steps) => {
                 if (err) {
                     res.status(400).json({"error":err.message});
                     return;
                 }
                 res.status(200).json({
                     message: "success",
-                    data: new RecipeResource(recipe, user, recipe_steps),
+                    data: new RecipeResource(recipe, recipe_steps),
                 });
             });
         })

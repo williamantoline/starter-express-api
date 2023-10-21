@@ -1,34 +1,30 @@
-
 class RecipeQueryBuilder {
     constructor() {
-        this.sql = "SELECT * FROM recipes WHERE TRUE";
+        this.sql = "SELECT recipes.*, users.* FROM recipes LEFT JOIN users ON recipes.userId = users.id WHERE TRUE";
     };
 
     availableFilters = {
-        user_id: "user_id",
+        userId: "userId",
         title: "title",
         description: "description",
     };
 
     availableSorts = {
         title: "title",
-        created_at: "created_at",
+        createdAt: "createdAt",
     };
 
     getQuery(req) {
-        this.filter = req.query.filter;
+        this.filters = req.query.filter ?? {};
         this.sort = req.query.sort;
+        this.page = req.query.page ?? 1;
+        const limit = 15;
 
-        if (this.filter) {
-            if (this.filter in this.availableFilters) {
-                    this.sql += ` AND ${this.availableFilters[key]} = ${this.filters[key]}`;
-                }
-            Object.keys(this.filters).forEach(key => {
-                if (key in this.availableFilters) {
-                    this.sql += ` AND ${this.availableFilters[key]} = ${this.filters[key]}`;
-                }
-            });
-        }
+        Object.keys(this.filters).forEach(key => {
+            if (key in this.availableFilters) {
+                this.sql += ` AND ${this.availableFilters[key]} = ${this.filters[key]}`;
+            }
+        });
 
         if (this.sort && (this.sort in this.availableSorts)) {
             let type = "ASC";
@@ -38,6 +34,8 @@ class RecipeQueryBuilder {
             }
             this.sql += ` ORDER BY ${sort} ${type}`;
         }
+
+        this.sql += ` LIMIT ${limit} OFFSET ${limit * this.page}`;
 
         return this.sql;
     };
