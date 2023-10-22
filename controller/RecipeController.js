@@ -41,7 +41,21 @@ exports.index = async (req, res) => {
 
 exports.show = async (req, res) => {
     try {
-        db.get(`SELECT * FROM recipes where id = ?`, [req.params.id], (err, recipe) => {
+        db.get(`
+            SELECT 
+                recipes.id AS id, 
+                recipes.title AS title, 
+                recipes.description AS description,
+                recipes.createdAt AS createdAt,
+                users.id AS user_id,
+                users.name AS user_name,
+                users.email AS user_email,
+                users.imagePath AS user_imagePath, 
+                users.createdAt AS user_createdAt
+            FROM recipes 
+            LEFT JOIN users ON recipes.userId = users.id
+            WHERE recipes.id = ? 
+        `, [req.params.id], (err, recipe) => {
             if (err) {
               res.status(400).json({"error":err.message});
               return;
@@ -52,7 +66,7 @@ exports.show = async (req, res) => {
                 });
                 return;
             }
-            db.get(`SELECT * FROM users where id = ?`, [recipe.userId], (err, user) => {
+            db.get(`SELECT id AS user_id, name as user_name, email as user_email, imagePath as user_imagePath, createdAt as user_createdAt FROM users where id = ?`, [recipe.userId], (err, user) => {
                 if (err) {
                     res.status(400).json({"error":err.message});
                     return;
