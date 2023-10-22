@@ -1,6 +1,18 @@
 class RecipeQueryBuilder {
     constructor() {
-        this.sql = "SELECT recipes.*, users.* FROM recipes LEFT JOIN users ON recipes.userId = users.id WHERE TRUE";
+        this.sql = `SELECT 
+            recipes.id AS id, 
+            recipes.title AS title, 
+            recipes.description AS description,
+            recipes.createdAt AS createdAt,
+            users.id AS user_id,
+            users.name AS user_name,
+            users.email AS user_email,
+            users.imagePath AS user_imagePath, 
+            users.createdAt AS user_createdAt
+        FROM recipes 
+        LEFT JOIN users ON recipes.userId = users.id 
+        WHERE TRUE`;
     };
 
     availableFilters = {
